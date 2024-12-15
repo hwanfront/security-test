@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+
+<th:block layout:fragment="head">
+    <title>Spring Boot</title>
+</th:block>
+<body>
+<th:block layout:fragment="header" th:insert="~{@{/fragments/header}}"></th:block>
+
+<div layout:fragment="content" class="content">
+    <h2>로그인 화면 </h2>
+    <form method="post" th:action="@{/api/login}" th:object="${memberDTO}" >
+
+        <input type="text" id="username" name="username" th:field="*{username}" placeholder="아이디" autofocus="" />
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red;"></div>
+        <input type="password" id="password" name="password" th:field="*{password}" placeholder="비밀번호" />
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;"></div>
+
+        <input id="joinBtn" type="submit" class="btn btn-secondary active" value="로그인" />
+        <a href="/join" class="btn btn-info active" role="button">회원가입</a>
+
+    </form>
+</div>
+</body>
+</html>
+
+
